@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'edu.sc.seis.launch4j' version '2.4.6'
 }
 
 group 'org.resset'
@@ -40,4 +41,8 @@ task uberjar(type: Jar, dependsOn : 'compileJava') {
         attributes 'Main-Class' : 'org.resset.HashTableDemo.Main'
     }
     baseName=project.name + "-uber"
+}
+
+createExe {
+    mainClassName = 'org.resset.HashTableDemo.Main'
 }

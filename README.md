@@ -20,7 +20,9 @@ The application supports the following probing methods:
 * Quadratic probing
 * Double hashing
 
-## Build requirements
+## Requirements
+For running the application it is needed to have JRE 8 installed.
+
 For building environment you need to have [OpenJDK 11](https://github.com/ojdkbuild/ojdkbuild) and Gradle installed. Building the `UberJar` is issued by using command `gradle build uberjar` in project root path.
 The resulting files will be in `builds/lib` path.
 

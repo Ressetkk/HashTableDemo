@@ -3,13 +3,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="610.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.resset.HashTableDemo.MainWindow">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.resset.HashTableDemo.MainWindow">
    <children>
       <VBox prefHeight="537.0" prefWidth="310.0">
          <children>
@@ -98,12 +99,57 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </Button>
+            <Label text="Hash Table settings">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="30.0" />
+               </VBox.margin>
+            </Label>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </Separator>
+            <Label text="Capacity">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="capacityValue">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Hashing mode">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <RadioButton fx:id="rb1" mnemonicParsing="false" selected="true" text="Linear probing">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </RadioButton>
+            <RadioButton fx:id="rb2" mnemonicParsing="false" text="Quadratic probing">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </RadioButton>
+            <RadioButton fx:id="rb3" mnemonicParsing="false" text="Double hashing">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </RadioButton>
+            <Button mnemonicParsing="false" onAction="#updateTable" prefHeight="25.0" prefWidth="332.0" text="Create New Hash Table">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
       <VBox>
          <children>
             <TextArea fx:id="infoTextArea" editable="false" prefHeight="184.0" prefWidth="477.0" text="Command Results" wrapText="true" />
-            <TextArea fx:id="tableViewArea" editable="false" prefHeight="430.0" prefWidth="477.0" text="Hash Table view" />
+            <TextArea fx:id="tableViewArea" editable="false" prefHeight="498.0" prefWidth="475.0" text="Hash Table view" />
          </children>
          <HBox.margin>
             <Insets />

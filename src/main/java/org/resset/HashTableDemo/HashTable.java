@@ -5,14 +5,29 @@ import java.util.ArrayList;
 public class HashTable<K, V> {
     private ArrayList<HashNode<K, V>> array;
     private int capacity;
+    private String mode;
 
     private int hash(K key, int i) {
         int hashCode = Math.abs(key.hashCode()); // get unique absolute integer value for key regardless of type
+        if (mode.equals("quadratic")) {
+            InputHelper.getInstance().infoField.setValue(InputHelper.appendText(InputHelper.getInstance().infoField.getValue(),
+                    "Using quadratic probing"));
+            return ((hashCode % capacity) + (24 * i) + 42 * (i * i)) % capacity;
+        } else if (mode.equals("double")) {
+            InputHelper.getInstance().infoField.setValue(InputHelper.appendText(InputHelper.getInstance().infoField.getValue(),
+                    "Using double hashing"));
+            int h1 = hashCode % capacity;
+            int h2 = 1 + (hashCode % (capacity - 2));
+            return (h1 + i * h2) % capacity;
+        }
+        InputHelper.getInstance().infoField.setValue(InputHelper.appendText(InputHelper.getInstance().infoField.getValue(),
+                "Using linear probing"));
         return ((hashCode % capacity) + i) % capacity;
     }
 
-    public HashTable() {
-        capacity = 5;
+    public HashTable(int capacity, String probingMode) {
+        this.capacity = capacity;
+        this.mode = probingMode;
         array = new ArrayList<>();
         for (int i = 0; i < capacity; i++) {
             array.add(null);
@@ -104,5 +119,9 @@ public class HashTable<K, V> {
             }
         }
         return sb.toString();
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 }

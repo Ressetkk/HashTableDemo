@@ -1,9 +1,9 @@
 package org.resset.HashTableDemo;
 
 
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.control.*;
 
 public class MainWindow {
     public TextArea infoTextArea;
@@ -13,14 +13,23 @@ public class MainWindow {
     public TextField addValue;
     public TextField searchKey;
     public TextField removeKey;
+    public TextField capacityValue;
 
     public Button searchButton;
     public Button addButton;
     public Button removeButton;
 
+    public RadioButton rb1;
+    public RadioButton rb2;
+    public RadioButton rb3;
+
+    final ToggleGroup toggleGroup;
+
     private HashTable<String, String> table;
     public MainWindow() {
-        table = new HashTable<>();
+        table = new HashTable<>(10, "linear");
+        toggleGroup = new ToggleGroup();
+
     }
     public void initialize() {
         addKey.textProperty().bindBidirectional(InputHelper.getInstance().addKey);
@@ -29,6 +38,17 @@ public class MainWindow {
         removeKey.textProperty().bindBidirectional(InputHelper.getInstance().removeKey);
         infoTextArea.textProperty().bindBidirectional(InputHelper.getInstance().infoField);
         tableViewArea.textProperty().bindBidirectional(InputHelper.getInstance().statusField);
+        capacityValue.textProperty().setValue(Integer.toString(table.getCapacity()));
+        rb1.setToggleGroup(toggleGroup);
+        rb1.setUserData("linear");
+
+        rb2.setToggleGroup(toggleGroup);
+        rb2.setUserData("quadratic");
+
+        rb3.setToggleGroup(toggleGroup);
+        rb3.setUserData("double");
+
+
     }
 
     public void addNewKey() {
@@ -52,6 +72,7 @@ public class MainWindow {
         } else {
             infoTextArea.setText("Invoked search function for key " + searchKey.getText());
             table.get(searchKey.getText());
+            searchKey.setText(null);
             tableViewArea.setText(table.returnHashTable());
         }
     }
@@ -62,8 +83,13 @@ public class MainWindow {
         } else {
             infoTextArea.setText("Invoked remove function for key " + removeKey.getText());
             table.remove(removeKey.getText());
+            removeKey.setText(null);
             tableViewArea.setText(table.returnHashTable());
         }
     }
-
+    public void updateTable() {
+        int capacity = Integer.parseInt(capacityValue.getText());
+        table = new HashTable<>(capacity, toggleGroup.getSelectedToggle().getUserData().toString());
+        infoTextArea.setText("Created new Hash Table with updated values!");
+    }
 }
